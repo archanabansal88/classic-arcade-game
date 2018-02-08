@@ -1,3 +1,25 @@
 body {
-    text-align: center;
+	text-align: center;
+}
+
+.list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 400px;
+	width: 540px;
+	text-align: center;
+	background: #c0d8c0;
+	margin: auto;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
 }
