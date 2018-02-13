@@ -16,10 +16,65 @@ body {
 	margin: auto;
 }
 
+.image-icon {
+	cursor: pointer;
+}
+
+.score-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#life {
+	margin-left: 20px;
+}
 .hide {
 	display: none;
 }
 
 .show {
 	display: block;
+}
+
+.win {
+	color: black;
+	text-align: center;
+	font-size: 20px;
+}
+
+#replay {
+	width: 550px;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	align-items: center;
+	flex-wrap: wrap;
+	flex-flow: column;
+	justify-content: center;
+	margin: auto;
+	display: none;
+}
+#replay.gameOver {
+	display: flex;
+	z-index: 1;
+	border-radius: 6px;
+	border: 2px solid transparent;
+	background: #c0d8c0;
+}
+
+.play-again {
+	outline: none;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	font-size: 1em;
+	padding: 6px;
+	min-width: 105px;
+	cursor: pointer;
+	color: white;
+	background: #0cb;
+	margin-top: 15px;
 }

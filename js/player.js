@@ -14,9 +14,20 @@
 
     Player.prototype.update = function() {
         if (this.y < 0) {
-            score++;
-            scoreValue.innerHTML = score;
             this.reset();
+            updateScore();
+        }
+        this.isGemCollected();
+    };
+
+    Player.prototype.isGemCollected = function() {
+        if (
+            gem.x - 60 < this.x &&
+            gem.x + 60 > this.x &&
+            gem.y - 60 < this.y &&
+            gem.y + 60 > this.y
+        ) {
+            handleGemCollection();
         }
     };
 
@@ -26,6 +37,8 @@
         this.x = 200;
         this.y = 380;
     };
+
+    //replay the game
 
     //Draw the player on the screen
 

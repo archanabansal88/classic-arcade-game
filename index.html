@@ -7,12 +7,20 @@
 </head>
 <body>
 		<h1>Classic Arcade Game</h1>
-		<h2 class="hide" id="score">Score: <span id="player-score"></span></h2>
+        <div class="score-container hide" id="score-display">
+		<h2 id="score">Score: <span id="player-score"></span></h2>
+        <h2 id="life">Life: <span id="player-life"></span></h2>
+        </div>
 		<div id="selection-container"></div>
+        <div id="replay">
+            <div class="win">Game Over</div>
+            <button class="play-again hide" id="playButton">Play Again!!</button>
+        </div>
     <script src="js/resources.js"></script>
     <script src="js/selection.js"></script>
     <script src="js/enemy.js"></script>
     <script src="js/player.js"></script>
+    <script src="js/gems.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
 </body>

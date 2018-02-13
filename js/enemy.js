@@ -40,9 +40,7 @@
             this.y - 40 < player.y &&
             this.y + 40 > player.y
         ) {
-            score = Math.max(0, --score);
-            scoreValue.innerHTML = score;
-            player.reset();
+            handleCollision();
         }
     };
 
