@@ -1,16 +1,23 @@
-//player class
-
 (function(global) {
+    /**
+    * @constructor represents Player
+    * @param {number} x
+    * @param {number} y
+    * @param {number} speed
+    * @param {string} selectedPlayer
+    * Setting the Player initial location and speed
+    */
     var Player = function(x, y, speed, selectedPlayer) {
-        //Setting the Player initial location and speed
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.sprite = selectedPlayer;
     };
 
-    //Check for player reaching top of canvas and winning the game
-    // increment score and Reset the game
+    /**
+    * @description update the player position on reaching top of canvas
+    * increment score and Reset the game
+    */
 
     Player.prototype.update = function() {
         if (this.y < 0) {
@@ -19,6 +26,10 @@
         }
         this.isGemCollected();
     };
+
+    /**
+    * @description checking gem collection by the Player
+    */
 
     Player.prototype.isGemCollected = function() {
         if (
@@ -31,23 +42,26 @@
         }
     };
 
-    //Reset the game by moving the player back to the initial location
-
+    /**
+    * @description Reset the game by moving the player back to the initial location
+    */
     Player.prototype.reset = function() {
         this.x = 200;
         this.y = 380;
     };
 
-    //replay the game
-
-    //Draw the player on the screen
+    /**
+    * @description Draw the player on the screen
+    */
 
     Player.prototype.render = function() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     };
 
-    //Receive user input, allowedKeys (the key which was pressed) and move the player according to that input
-    //Player can not move off screen
+    /**
+    * @description Receive user input, allowedKeys (the key which was pressed) and move the player according to that input
+    * Player can not move off screen
+    */
 
     Player.prototype.handleInput = function(pressedKey) {
         if (pressedKey === 'left' && this.x > 0) {

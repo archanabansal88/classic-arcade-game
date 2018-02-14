@@ -1,6 +1,5 @@
 frontend-nanodegree-arcade-game project 
 > [Live Demo](https://archanabansal88.github.io/classic-arcade-game/)
-===============================
 
 ## Project Purpose:
 

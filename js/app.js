@@ -1,7 +1,5 @@
-//list of players
 (function(global) {
     var score, life;
-
     var scoreValue = document.getElementById('player-score');
     var lifeValue = document.getElementById('player-life');
     var replay = document.getElementById('replay');
@@ -49,19 +47,22 @@
     };
 
     var a = new Selection(playersList, handlePlayerSelection);
-
-    // document.getElementById('playButton').addEventListener('click', handlePlayAgain);
-
-    // function handlePlayAgain() {
-    //     document.getElementById('selection-container').classList.toggle('hide');
-    //     replay.classList.toggle('gameOver');
-    //     document.getElementById('score-display').classList.toggle('hide');
-    // }
+    var button = document.getElementById('replay').addEventListener('click', function() {
+        if (event.target.className === 'play-again') {
+            gameOver();
+        }
+    });
 
     function gameOver() {
         replay.classList.toggle('gameOver');
-        player.x = 1000;
+        score = 0;
+        life = 3;
+        lifeValue.innerHTML = life;
+        scoreValue.innerHTML = score;
+        player.reset();
     }
+
+    // if the player collides with an enemy, the game is reset and the player moves back to the start square
 
     function handleCollision() {
         score = Math.max(0, --score);
