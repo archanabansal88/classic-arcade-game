@@ -7,22 +7,23 @@
     * @param {string} selectedPlayer
     * Setting the Player initial location and speed
     */
-    var Player = function(x, y, speed, selectedPlayer) {
+    var Player = function(x, y, speed, selectedPlayer, onUpdateScore, onGemCollection) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.sprite = selectedPlayer;
+        this.onUpdateScore = onUpdateScore;
+        this.onGemCollection = onGemCollection;
     };
 
     /**
-    * @description update the player position on reaching top of canvas
-    * increment score and Reset the game
+    * @description update the player position on reaching top of canvas and Reset the game
     */
 
     Player.prototype.update = function() {
         if (this.y < 0) {
             this.reset();
-            updateScore();
+            this.onUpdateScore();
         }
         this.isGemCollected();
     };
@@ -38,7 +39,7 @@
             gem.y - 60 < this.y &&
             gem.y + 60 > this.y
         ) {
-            handleGemCollection();
+            this.onGemCollection();
         }
     };
 

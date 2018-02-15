@@ -5,9 +5,10 @@
     * Setting the Enemy initial location and speed
     */
 
-    var Enemy = function(y) {
+    var Enemy = function(y, onCollision) {
         this.x = 0;
         this.y = y;
+        this.onCollision = onCollision;
         this.sprite = 'images/enemy-bug.png';
         this.speed = Math.floor(Math.random() * 300) + 70;
     };
@@ -41,7 +42,7 @@
             this.y - 50 < player.y &&
             this.y + 50 > player.y
         ) {
-            handleCollision();
+            this.onCollision();
         }
     };
 

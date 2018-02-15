@@ -4,33 +4,76 @@
     var lifeValue = document.getElementById('player-life');
     var replay = document.getElementById('replay');
 
-    var playersList = [
-        'images/char-boy.png',
-        'images/char-cat-girl.png',
-        'images/char-horn-girl.png',
-        'images/char-pink-girl.png',
-        'images/char-princess-girl.png',
-    ];
+    /**
+    * @constructor represents AppController
+    */
+    var AppController = function() {
+        this.playersList = [
+            'images/char-boy.png',
+            'images/char-cat-girl.png',
+            'images/char-horn-girl.png',
+            'images/char-pink-girl.png',
+            'images/char-princess-girl.png',
+        ];
+        this.init();
+    };
 
-    var handlePlayerSelection = function(selectedPlayer) {
-        // Place the player object in a variable called player
+    /**
+    * @description initialize the app
+    */
+
+    AppController.prototype.init = function() {
+        var a = new Selection(this.playersList, this.handlePlayerSelection.bind(this));
+        this.attachEvent();
+    };
+
+    /**
+    * @description set up the event listener to play the game again
+    */
+
+    AppController.prototype.attachEvent = function() {
+        document.getElementById('replay').addEventListener('click', () => {
+            if (event.target.className === 'play-again') {
+                this.gameOver();
+            }
+        });
+    };
+
+    /**
+    * @description handling the selected player and start the game
+    * @param {string} selectedPlayer
+    */
+
+    AppController.prototype.handlePlayerSelection = function(selectedPlayer) {
         score = 0;
         life = 3;
         lifeValue.innerHTML = life;
         scoreValue.innerHTML = score;
+        this.createObject(selectedPlayer);
+        document.getElementById('score-display').classList.toggle('hide');
+        document.getElementById('selection-container').classList.toggle('hide');
+        startGame();
+    };
 
-        global.player = new Player(200, 380, 50, selectedPlayer);
+    /**
+    * @description instantiating objects from Player, Enemy and Gems class
+    * @param {string} selectedPlayer
+    */
 
-        var enemy1 = new Enemy(60);
-        var enemy2 = new Enemy(140);
-        var enemy3 = new Enemy(230);
-
-        // Place all enemy objects in an array called allEnemies
+    AppController.prototype.createObject = function(selectedPlayer) {
+        global.player = new Player(
+            200,
+            380,
+            50,
+            selectedPlayer,
+            this.updateScore.bind(this),
+            this.handleGemCollection.bind(this)
+        );
+        var enemy1 = new Enemy(60, this.handleCollision.bind(this));
+        var enemy2 = new Enemy(140, this.handleCollision.bind(this));
+        var enemy3 = new Enemy(230, this.handleCollision.bind(this));
         global.allEnemies = [enemy1, enemy2, enemy3];
         global.gem = new Gems();
-
-        // This listens for key presses and sends the keys to your
-        // Player.handleInput() method. You don't need to modify this.
         document.addEventListener('keyup', function(e) {
             var allowedKeys = {
                 37: 'left',
@@ -41,55 +84,60 @@
 
             player.handleInput(allowedKeys[e.keyCode]);
         });
-        document.getElementById('score-display').classList.toggle('hide');
-        document.getElementById('selection-container').classList.toggle('hide');
-        startGame();
     };
 
-    var a = new Selection(playersList, handlePlayerSelection);
-    var button = document.getElementById('replay').addEventListener('click', function() {
-        if (event.target.className === 'play-again') {
-            gameOver();
-        }
-    });
+    /**
+    * @description decrementing the score and life after the player collides with the enemy and reseting the game
+    */
 
-    function gameOver() {
+    AppController.prototype.handleCollision = function() {
+        score = Math.max(0, --score);
+        scoreValue.innerHTML = score;
+        life = Math.max(0, --life);
+        lifeValue.innerHTML = life;
+        if (life === 0) {
+            this.gameOver();
+        } else {
+            player.reset();
+        }
+    };
+
+    /**
+    * @description reseting the game after game is over
+    */
+
+    AppController.prototype.gameOver = function() {
         replay.classList.toggle('gameOver');
         score = 0;
         life = 3;
         lifeValue.innerHTML = life;
         scoreValue.innerHTML = score;
         player.reset();
-    }
+        gem.show();
+    };
 
-    // if the player collides with an enemy, the game is reset and the player moves back to the start square
+    /**
+    * @description incrementing the score if player collects the gem and hiding the gem
+    */
 
-    function handleCollision() {
-        score = Math.max(0, --score);
-        scoreValue.innerHTML = score;
-        life = Math.max(0, --life);
-        lifeValue.innerHTML = life;
-        if (life === 0) {
-            gameOver();
-        } else {
-            player.reset();
-        }
-    }
-
-    function handleGemCollection() {
+    AppController.prototype.handleGemCollection = function() {
         score += 5;
         scoreValue.innerHTML = score;
         gem.hide();
-    }
+    };
 
-    function updateScore() {
+    /**
+    * @description incrementing the score once the player reach the top of canvas and display the gem
+    */
+
+    AppController.prototype.updateScore = function() {
         score++;
         scoreValue.innerHTML = score;
         gem.show();
-    }
-
-    global.handleGemCollection = handleGemCollection;
-    global.gameOver = gameOver;
-    global.handleCollision = handleCollision;
-    global.updateScore = updateScore;
+    };
+    global.App = AppController;
 })(window);
+
+(function() {
+    new App();
+})();

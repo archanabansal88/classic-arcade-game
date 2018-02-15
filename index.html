@@ -7,15 +7,23 @@
 </head>
 <body>
 		<h1>Classic Arcade Game</h1>
+
         <div class="score-container hide" id="score-display">
-		<h2 id="score">Score: <span id="player-score"></span></h2>
-        <h2 id="life">Life: <span id="player-life"></span></h2>
+            <!-- number of scores -->
+    		<h2 id="score">Score: <span id="player-score"></span></h2>
+            <!-- number of lifes -->
+            <h2 id="life">Life: <span id="player-life"></span></h2>
         </div>
+
+        <!-- selection container holding list of players  -->
 		<div id="selection-container"></div>
+
+        <!-- Game Over message and play again button -->
         <div id="replay">
             <div class="gameOver">Game Over</div>
             <button class="play-again">Play Again</button>
         </div>
+
     <script src="js/resources.js"></script>
     <script src="js/selection.js"></script>
     <script src="js/enemy.js"></script>
