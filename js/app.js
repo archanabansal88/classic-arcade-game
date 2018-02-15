@@ -135,9 +135,7 @@
         scoreValue.innerHTML = score;
         gem.show();
     };
-    global.App = AppController;
-})(window);
 
-(function() {
-    new App();
-})();
+    // Create instance of AppController
+    new AppController();
+})(window);
