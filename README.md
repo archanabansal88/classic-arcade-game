@@ -11,11 +11,15 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 ## Additional Functionality:
 
-> Player selection: allow the user to select the image for the player character before starting the game. 
+> Player selection: the user is allowed to select the image for the player character before starting the game. 
 
-> Score: you can implement a score for the game. For example, the score can increase each time the player reaches the water,
- 		and it can be reduced when collision occurs.
+> Score: the score can increase each time the player reaches the water,and it can be reduced when collision occurs.
 
 > Life: At start of the game Player has 3 life. After each collision life can be reduced.Game is over when life will be 0.
 
-> Collectibles: you can add gems to the game, allowing the player to collect them to increment the score.
+> Collectibles: the player can collect gems to increment the score.
+
+## How to run the application Locally
+
+* clone/download the repository
+* open index.html on the browser
